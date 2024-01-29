@@ -20,6 +20,16 @@ TEST(MatrixTest, CheckNumberOfColumns)
     EXPECT_EQ(test_matrix.cols(), 4);
 }
 
+TEST(MatrixTest, InitializerListContructorTest)
+{
+    stdmath::matrix::MatrixXX<double, 3, 4> test_matrix = {
+        {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+    EXPECT_EQ(test_matrix(1, 3), 8);
+
+    test_matrix(1, 3) = 0;
+    EXPECT_EQ(test_matrix(1, 3), 0);
+}
+
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);

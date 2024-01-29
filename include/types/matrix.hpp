@@ -1,6 +1,7 @@
 #ifndef TYPES_MATRIX_HPP
 #define TYPES_MATRIX_HPP
 
+#include "assert.h"
 #include "iostream"
 #include "memory"
 #include "tuple"
