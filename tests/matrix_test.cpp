@@ -1,6 +1,7 @@
 #include "matrix.hpp"
 
 #include "gtest/gtest.h"
+#include "iostream"
 
 TEST(MatrixTest, CheckSize)
 {
@@ -28,6 +29,34 @@ TEST(MatrixTest, InitializerListContructorTest)
 
     test_matrix(1, 3) = 0;
     EXPECT_EQ(test_matrix(1, 3), 0);
+}
+
+TEST(MatrixTest, FloatMatrixTest)
+{
+    stdmath::matrix::MatrixXf<2, 3> test_matrix{{{1, 2, 3}, {4, 5, 6}}};
+    EXPECT_EQ(test_matrix.size(), std::make_tuple(2, 3));
+    EXPECT_EQ(typeid(test_matrix(0, 0)), typeid(float));
+}
+
+TEST(MatrixTest, DoubleMatrixTest)
+{
+    stdmath::matrix::MatrixXd<2, 3> test_matrix{{{1, 2, 3}, {4, 5, 6}}};
+    EXPECT_EQ(test_matrix.size(), std::make_tuple(2, 3));
+    EXPECT_EQ(typeid(test_matrix(0, 0)), typeid(double));
+}
+
+TEST(MatrixTest, FloatSquareMatrixTest)
+{
+    stdmath::matrix::MatrixXf<2, 2> test_matrix{{{1, 2}, {4, 5}}};
+    EXPECT_EQ(test_matrix.size(), std::make_tuple(2, 2));
+    EXPECT_EQ(typeid(test_matrix(0, 0)), typeid(float));
+}
+
+TEST(MatrixTest, DoubleSquareMatrixTest)
+{
+    stdmath::matrix::MatrixXd<2, 2> test_matrix{{{1, 2}, {4, 5}}};
+    EXPECT_EQ(test_matrix.size(), std::make_tuple(2, 2));
+    EXPECT_EQ(typeid(test_matrix(0, 0)), typeid(double));
 }
 
 int main(int argc, char** argv)
