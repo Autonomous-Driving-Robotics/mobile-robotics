@@ -3,7 +3,7 @@ BasedOnStyle: Google
 IndentWidth: 4
 UseTab: Never
 TabWidth: 8
-ColumnLimit: 99
+ColumnLimit: 90
 PointerAlignment: Right
 AccessModifierOffset: -2
 BreakBeforeBraces: Allman

@@ -30,7 +30,7 @@ class MatrixXX
     }
     MatrixXX(std::initializer_list<std::initializer_list<T>> lst)
     {
-        // TODO: Modify the logic to also acoount for Column major code
+        // TODO: Modify the logic to also acount for Column major code
         data = new T[numberOfRows * numberOfColumns];
         assert(numberOfRows == lst.size());
         int index = 0;
@@ -63,7 +63,13 @@ class MatrixXX
     {
         return numberOfColumns;
     }
-    void resize();
+    void resize(size_t rows, size_t cols)
+    {
+        assert(rows * cols == numberOfRows * numberOfColumns);
+        numberOfRows = rows;
+        numberOfColumns = cols;
+        // TODO: What happens when the assertion fails?
+    }
 };
 
 template <size_t numberOfRows, size_t numberOfColumns>
@@ -78,9 +84,10 @@ using SquareMatrixXf = MatrixXX<float, numberOfRows, numberOfRows>;
 template <size_t numberOfRows>
 using SquareMatrixXd = MatrixXX<double, numberOfRows, numberOfRows>;
 
+// TODO: Implement row and column vector and
+// overwrite the paranthesis based referencing
 template <size_t numberOfRows>
-using VectorXf = MatrixXX<float, numberOfRows, 1>;  // TODO: Implement row and column vector and
-                                                    // overwrite the pranthesis based referencing
+using VectorXf = MatrixXX<float, numberOfRows, 1>;
 
 }  // namespace matrix
 
