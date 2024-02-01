@@ -1,2 +1,3 @@
 target_include_directories(matrix PUBLIC types)
 target_include_directories(bayes_filter PUBLIC bayes_filter)
+target_include_directories(vector PUBLIC types)
