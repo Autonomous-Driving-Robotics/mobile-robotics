@@ -34,11 +34,11 @@ class VectorXX : public stdmath::matrix::MatrixXX<T, numberOfRows, 1>
             index++;
         }
     }
-    T& operator()(size_t index)
+    T& operator[](size_t index)
     {
         return data[index];
     }
-    T operator()(size_t index) const
+    T operator[](size_t index) const
     {
         return data[index];
     }

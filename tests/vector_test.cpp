@@ -24,24 +24,24 @@ TEST(VectorTest, CheckNumberOfColumns)
 TEST(VectorTest, InitializerListContructorTest)
 {
     stdmath::vector::VectorXX<double, 4> test_vector = {1, 2, 3, 4};
-    EXPECT_EQ(test_vector(1), 2);
+    EXPECT_EQ(test_vector[1], 2);
 
-    test_vector(3) = 0;
-    EXPECT_EQ(test_vector(3), 0);
+    test_vector[3] = 0;
+    EXPECT_EQ(test_vector[3], 0);
 }
 
 TEST(VectorTest, FloatVectorTest)
 {
     stdmath::vector::VectorXf<2> test_vector{{1, 2}};
     EXPECT_EQ(test_vector.size(), std::make_tuple(2, 1));
-    EXPECT_EQ(typeid(test_vector(0)), typeid(float));
+    EXPECT_EQ(typeid(test_vector[0]), typeid(float));
 }
 
 TEST(VectorTest, DoubleVectorTest)
 {
     stdmath::vector::VectorXd<2> test_vector{{1, 2}};
     EXPECT_EQ(test_vector.size(), std::make_tuple(2, 1));
-    EXPECT_EQ(typeid(test_vector(0)), typeid(double));
+    EXPECT_EQ(typeid(test_vector[0]), typeid(double));
 }
 
 int main(int argc, char** argv)
