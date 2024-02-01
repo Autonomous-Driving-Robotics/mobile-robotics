@@ -27,3 +27,10 @@ target_link_libraries(bayes_filter_test
     matrix
     bayes_filter)
 gtest_discover_tests(bayes_filter_test)
+
+add_executable(vector_test vector_test.cpp)
+target_link_libraries(vector_test
+    PRIVATE
+    GTest::GTest
+    matrix)
+gtest_discover_tests(vector_test)
