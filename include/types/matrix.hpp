@@ -84,10 +84,46 @@ using SquareMatrixXf = MatrixXX<float, numberOfRows, numberOfRows>;
 template <size_t numberOfRows>
 using SquareMatrixXd = MatrixXX<double, numberOfRows, numberOfRows>;
 
-// TODO: Implement row and column vector and
-// overwrite the paranthesis based referencing
+template <class T, size_t numberOfRows>
+class VectorXX : public MatrixXX<T, numberOfRows, 1>
+{
+  private:
+    T* data;
+
+  public:
+    VectorXX()
+    {
+        data = new T[numberOfRows];
+    }
+    ~VectorXX()
+    {
+        delete[] data;
+    }
+    VectorXX(std::initializer_list<T> lst)
+    {
+        data = new T[numberOfRows];
+        size_t index{0};
+        for (auto element : lst)
+        {
+            data[index] = element;
+            index++;
+        }
+    }
+    T& operator()(size_t index) override
+    {
+        return data[index];
+    }
+    T operator()(size_t index) const override
+    {
+        return data[index];
+    }
+};
+
 template <size_t numberOfRows>
-using VectorXf = MatrixXX<float, numberOfRows, 1>;
+using VectorXf = VectorXX<float, numberOfRows>;
+
+template <size_t numberOfRows>
+using VectorXd = VectorXX<double, numberOfRows>;
 
 }  // namespace matrix
 
