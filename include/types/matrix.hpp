@@ -16,7 +16,7 @@ namespace matrix
 template <class T, size_t numberOfRows, size_t numberOfColumns, bool rowMajor = true>
 class MatrixXX
 {
-  protected:
+  private:
     T* data;
 
   public:
