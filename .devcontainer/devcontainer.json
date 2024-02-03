@@ -16,7 +16,8 @@
                 "parasoft.vscode-cpptest",
                 "ms-dotnettools.vscode-dotnet-runtime",
                 "ms-iot.vscode-ros",
-                "ms-toolsai.jupyter"
+                "ms-toolsai.jupyter",
+                "GitHub.vscode-github-actions"
             ]
         }
     },
