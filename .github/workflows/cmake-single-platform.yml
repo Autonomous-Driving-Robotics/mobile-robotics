@@ -22,7 +22,7 @@ jobs:
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. 
       # `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS_DEBUG="-g -fprofile-arcs -ftest-coverage"
 
     - name: Build
       # Build your program with the given configuration
@@ -31,9 +31,7 @@ jobs:
     - name: Test
       working-directory: ${{github.workspace}}/build
       # Execute tests defined by the CMake configuration.
-      run: |
-        ctest -C ${{env.BUILD_TYPE}}
-        gcov -o . tests/*.cpp
+      run: ctest -C ${{env.BUILD_TYPE}} -T Test -T Coverage
       
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
