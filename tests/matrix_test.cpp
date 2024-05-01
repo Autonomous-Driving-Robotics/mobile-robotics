@@ -59,6 +59,75 @@ TEST(MatrixTest, DoubleSquareMatrixTest)
     EXPECT_EQ(typeid(test_matrix(0, 0)), typeid(double));
 }
 
+TEST(MatrixTest, EqualityTest)
+{
+    stdmath::matrix::MatrixXd<2, 2> test_matrix1{{{1, 2}, {4, 5}}};
+    stdmath::matrix::MatrixXd<2, 2> test_matrix2{{{1, 2}, {4, 5}}};
+    stdmath::matrix::MatrixXd<2, 2> test_matrix3{{{2, 1}, {3, 0}}};
+
+    EXPECT_TRUE(test_matrix1 == test_matrix2);
+    EXPECT_FALSE(test_matrix1 == test_matrix3);
+
+    EXPECT_FALSE(test_matrix1 != test_matrix2);
+    EXPECT_TRUE(test_matrix1 != test_matrix3);
+}
+
+TEST(MatrixTest, AddTwoMatrix)
+{
+    stdmath::matrix::MatrixXd<2, 2> test_matrix1{{{1, 2}, {4, 5}}};
+    stdmath::matrix::MatrixXd<2, 2> test_matrix2{{{2, 1}, {3, 0}}};
+    stdmath::matrix::MatrixXd<2, 2> res1{{{3, 3}, {7, 5}}};
+    EXPECT_TRUE(res1 == (test_matrix1 + test_matrix2));
+
+    stdmath::matrix::MatrixXd<2, 2> res2{{{3, 1}, {7, 0}}};
+    EXPECT_FALSE(res2 == (test_matrix1 + test_matrix2));
+}
+
+TEST(MatrixTest, SubtractTwoMatrix)
+{
+    stdmath::matrix::MatrixXd<2, 2> test_matrix1{{{1, 2}, {4, 5}}};
+    stdmath::matrix::MatrixXd<2, 2> test_matrix2{{{2, 1}, {3, 0}}};
+    stdmath::matrix::MatrixXd<2, 2> res1{{{-1, 1}, {1, 5}}};
+    EXPECT_TRUE(res1 == (test_matrix1 - test_matrix2));
+
+    stdmath::matrix::MatrixXd<2, 2> res2{{{3, 1}, {7, 0}}};
+    EXPECT_FALSE(res2 == (test_matrix1 - test_matrix2));
+}
+
+TEST(MatrixTest, AddCompoundOperator)
+{
+    stdmath::matrix::MatrixXd<2, 2> test_matrix1{{{1, 2}, {4, 5}}};
+    stdmath::matrix::MatrixXd<2, 2> test_matrix2{{{2, 1}, {3, 0}}};
+    test_matrix1 += test_matrix2;
+    stdmath::matrix::MatrixXd<2, 2> res1{{{3, 3}, {7, 5}}};
+    EXPECT_TRUE(res1 == test_matrix1);
+
+    stdmath::matrix::MatrixXd<2, 2> res2{{{3, 1}, {7, 0}}};
+    EXPECT_FALSE(res2 == test_matrix1);
+}
+
+TEST(MatrixTest, SubtractCompoundOperator)
+{
+    stdmath::matrix::MatrixXd<2, 2> test_matrix1{{{1, 2}, {4, 5}}};
+    stdmath::matrix::MatrixXd<2, 2> test_matrix2{{{2, 1}, {3, 0}}};
+    test_matrix1 -= test_matrix2;
+    stdmath::matrix::MatrixXd<2, 2> res1{{{-1, 1}, {1, 5}}};
+    EXPECT_TRUE(res1 == test_matrix1);
+
+    stdmath::matrix::MatrixXd<2, 2> res2{{{3, 1}, {7, 0}}};
+    EXPECT_FALSE(res2 == test_matrix1);
+}
+
+TEST(MatrixTest, UnarySubtractOperator)
+{
+    stdmath::matrix::MatrixXd<2, 2> test_matrix1{{{1, 2}, {4, 5}}};
+    stdmath::matrix::MatrixXd<2, 2> res1{{{-1, -2}, {-4, -5}}};
+    EXPECT_TRUE(res1 == -test_matrix1);
+
+    stdmath::matrix::MatrixXd<2, 2> res2{{{3, 1}, {7, 0}}};
+    EXPECT_FALSE(res2 == -test_matrix1);
+}
+
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);

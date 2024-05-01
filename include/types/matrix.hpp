@@ -6,6 +6,7 @@
 #include "memory"
 #include "tuple"
 #include "vector"
+#include "type_traits"
 
 namespace stdmath
 {
@@ -69,6 +70,86 @@ class MatrixXX
         numberOfRows = rows;
         numberOfColumns = cols;
         // TODO: What happens when the assertion fails?
+    }
+    MatrixXX<T, numberOfRows, numberOfColumns, rowMajor> operator+(
+        const MatrixXX<T, numberOfRows, numberOfColumns, rowMajor>& mat) const
+    {
+        assert(this->rows() == mat.rows() && this->cols() == mat.cols());
+        static_assert( std::is_same<decltype(this->data), decltype(mat.data)>::value == true );
+
+        MatrixXX<T, numberOfRows, numberOfColumns, rowMajor> res{};
+        for(size_t i = 0; i < numberOfRows * numberOfColumns; i++)
+            res.data[i] = data[i] + mat.data[i];
+        return res;
+    }
+
+    MatrixXX<T, numberOfRows, numberOfColumns, rowMajor> operator-(
+        const MatrixXX<T, numberOfRows, numberOfColumns, rowMajor>& mat) const
+    {
+        assert(this->rows() == mat.rows() && this->cols() == mat.cols());
+        static_assert( std::is_same<decltype(this->data), decltype(mat.data)>::value == true );
+
+        MatrixXX<T, numberOfRows, numberOfColumns, rowMajor> res{};
+        for(size_t i = 0; i < numberOfRows * numberOfColumns; i++)
+            res.data[i] = data[i] - mat.data[i];
+        return res;
+    }
+
+    MatrixXX<T, numberOfRows, numberOfColumns, rowMajor>& operator+=(
+        const MatrixXX<T, numberOfRows, numberOfColumns, rowMajor>& mat)
+    {
+        assert(this->rows() == mat.rows() && this->cols() == mat.cols());
+        static_assert( std::is_same<decltype(this->data), decltype(mat.data)>::value == true );
+
+        for(size_t i = 0; i < numberOfRows * numberOfColumns; i++)
+            data[i] = data[i] + mat.data[i];
+        return *this;
+    }
+
+    MatrixXX<T, numberOfRows, numberOfColumns, rowMajor>& operator-=(
+        const MatrixXX<T, numberOfRows, numberOfColumns, rowMajor>& mat)
+    {
+        assert(this->rows() == mat.rows() && this->cols() == mat.cols());
+        static_assert( std::is_same<decltype(this->data), decltype(mat.data)>::value == true );
+
+        for(size_t i = 0; i < numberOfRows * numberOfColumns; i++)
+            data[i] = data[i] - mat.data[i];
+        return *this;
+    }
+
+    MatrixXX<T, numberOfRows, numberOfColumns, rowMajor> operator-()
+    {
+        for(size_t i = 0; i < numberOfRows * numberOfColumns; i++)
+            data[i] = -data[i];
+        return *this;
+    }
+
+    bool operator==(const MatrixXX<T, numberOfRows, numberOfColumns, rowMajor>& mat)
+    {
+        assert(this->rows() == mat.rows() && this->cols() == mat.cols());
+        static_assert( std::is_same<decltype(this->data), decltype(mat.data)>::value == true );
+
+        bool res{true};
+        for(size_t i = 0; i < numberOfRows * numberOfColumns; i++)
+        {
+            res &= data[i] == mat.data[i];
+            if (!res) break;
+        }
+        return res;
+    }
+
+    bool operator!=(const MatrixXX<T, numberOfRows, numberOfColumns, rowMajor>& mat)
+    {
+        assert(this->rows() == mat.rows() && this->cols() == mat.cols());
+        static_assert( std::is_same<decltype(this->data), decltype(mat.data)>::value == true );
+
+        bool res{false};
+        for(size_t i = 0; i < numberOfRows * numberOfColumns; i++)
+        {
+            res |= data[i] != mat.data[i];
+            if (res) break;
+        }
+        return res;
     }
 };
 
