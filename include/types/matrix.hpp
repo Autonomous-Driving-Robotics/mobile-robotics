@@ -51,7 +51,7 @@ class MatrixXX
     {
         return data[row * numberOfColumns + col];
     }
-    T operator()(size_t row, size_t col) const
+    const T& operator()(size_t row, size_t col) const
     {
         return data[row * numberOfColumns + col];
     }
