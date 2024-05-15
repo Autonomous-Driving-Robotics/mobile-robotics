@@ -38,7 +38,7 @@ class VectorXX : public stdmath::matrix::MatrixXX<T, numberOfRows, 1>
     {
         return data[index];
     }
-    T operator[](size_t index) const
+    const T& operator[](size_t index) const
     {
         return data[index];
     }
