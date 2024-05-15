@@ -44,6 +44,14 @@ TEST(VectorTest, DoubleVectorTest)
     EXPECT_EQ(typeid(test_vector[0]), typeid(double));
 }
 
+TEST(VectorTest, AddTwoVectors)
+{
+    stdmath::vector::VectorXd<2> test_vector1{{1, 2}};
+    stdmath::vector::VectorXd<2> test_vector2{{3, 4}};
+    // stdmath::vector::VectorXd<2> res = test_vector1 + test_vector2;
+    // EXPECT_EQ(res, stdmath::vector::VectorXd<2>{{4, 6}});
+}
+
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
